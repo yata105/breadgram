@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :posts
   attr_accessor :login
 
   devise :database_authenticatable, :registerable,
