@@ -20,8 +20,22 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <%= yield %>
+    <header>
+      <div class="logo-container">
+        <%= image_tag "breadgram_logo.svg", alt: "Иконка", class: "svg-logo" %>
+        <div class="caption-text">
+          breadgram
+        </div>
+      </div>
+      <div class="title" data-turbo="false">
+        <%= yield(:page_title) %>
+      </div>  
+      <div class="empty138w">
+      </div>
+    </header>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

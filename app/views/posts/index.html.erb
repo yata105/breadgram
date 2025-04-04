@@ -1,16 +1,16 @@
+<% content_for :page_title, "Feed" %>
+<%= stylesheet_link_tag 'post', media: 'all' %>
+
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Posts" %>
+<div class="left-panel">
 
-<h1>Posts</h1>
-
-<div id="posts">
+</div>
+<div id="posts" class="content-posts">
   <% @posts.each do |post| %>
     <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
   <% end %>
 </div>
+<%#= link_to "New post", new_post_path %>
 
-<%= link_to "New post", new_post_path %>
+<%#= link_to "Show this post", post %>

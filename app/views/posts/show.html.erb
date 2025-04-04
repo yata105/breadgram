@@ -1,10 +1,82 @@
+<% content_for :page_title, "View post" %>
+
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
+<div class="post-show-container">
+  <div class="image-panel">
+    <%= link_to posts_path, class: "button" do %>
+      <%= image_tag "arrow_back.svg", alt: "back", style: "height: 18px; width: 8px;", class: "bg-transparent" %>
+      <div class="button-text">
+        Back
+      </div>
+    <% end %>
+    <% if @post.image.attached? %>
+      <%= image_tag(@post.image, class: "post-image") %>
+    <% end %>
+  </div>
+  
+  <div class="post-info-panel">
+    <div class="post-info">
+      <% if @post.user.avatar.attached? %>
+        <%= image_tag @post.user.thumbnail, alt: "profile image" %>
+      <% else %>
+        <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
+      <% end %>
+      <div class="post-profile-date-likes">
+        <div class="post-profile-date">
+          <div class="post-profile">
+            <%= @post.user.username %>
+          </div>
+          <div class="post-date">
+            <%= @post.created_at.to_date %>
+          </div>
+        </div>
+        <button class="button">
+          <%= image_tag "like.svg", alt: "like", style: "height: 20px; width: 22.55px;", class: "bg-transparent" %>
+          <div class="button-text">
+            Like
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="post-description">
+      <%= @post.description %>
+    </div>
+    <input type="text" name="comment" id="comment" placeholder="Leave a comment...">
 
+    <% @post.comments.each do |comment| %>
+    <div class="comment">
+      <div class="post-info">
+        <% if comment.user.avatar.attached? %>
+          <%= image_tag @post.user.thumbnail, alt: "profile image" %>
+        <% else %>
+          <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
+        <% end %>
+        <div class="post-profile-date-likes">
+          <div class="post-profile-date">
+            <div class="post-profile">
+              <%= comment.user.username %>
+            </div>
+            <div class="post-date">
+              <%= comment.created_at.to_date %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="post-description">
+        <%= comment.value %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+<!--
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", posts_path %>
 
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
+-->

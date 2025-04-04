@@ -1,17 +1,222 @@
+@font-face {
+  font-family: "LT";
+  src: url('LTSuperior-Medium.otf');
+}
+
+@font-face {
+  font-family: "LT-Bold";
+  src: url('LTSuperior-Bold.otf');
+}
+
+/*
+                              <header>
+*/
+
 * {
   margin: 0;
   padding: 0;
   background: #292929;
   color: white;
+  font-family: "LT", sans-serif;
+}
+
+header {
+  background: #2E2E2E;
+  color: #FFE6AF;
+  height: 43px;
+  border-bottom: 1px solid #4D4F59;
+  padding-left: 269px;
+  padding-right: 269px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  background: inherit;
+  color: inherit;
+}
+
+.svg-logo {
+  height: 24px;
+  width: 31px;
+  background: inherit;
+}
+
+.caption-text {
+  background: inherit;
+  color: inherit;
+  font-family: "LT-Bold", sans-serif;
+  font-size: 1.25rem;
+}
+
+.title {
+  background: inherit;
+  color: inherit;
+  font-family: "LT", sans-serif;
+  font-size: 1.25rem;
+  align-self: center;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.empty138w {
+  width: 138px;
+  height: 43px;
+  background: inherit;
 }
 
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+                              </header>
+*/
+
+/*
+                              <content>
+*/
+
+.content {
+  padding-left: 269px;
+  padding-right: 269px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+.left-panel {
+  width: 145px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.button,
+input[type="button"],
+input[type="submit"] {
+  background: #897957;
+  border-radius: 8px;
+  border: none;
+  height: 34px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFE6AF;
+  font-size: 1.125rem;
+}
+
+.button,
+input[type="button"],
+input[type="submit"]:hover {
+  background: #a39067;
+  color: #ffefce;
+}
+
+.button-text {
+  color: #FFE6AF;
+  font-size: 1.125rem;
+  line-height: 36px;
+  background: transparent;
+  height: inherit;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+.profile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+
+br {
+  display: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"] {
+  border: 1px solid #4D4F59;
+  color: #4D4F59;
+  height: 32px;
+  width: inherit;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding-left: 8px;
+  outline: none;
+  font-size: 1.125rem;
+  line-height: 28px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"]:focus {
+  color: #BFC3D4;
+  border: 1px solid #BFC3D4;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  outline: none;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border-radius: 100%;
+  box-sizing: border-box;
+  border: 1px solid #4D4F59;
+  transition: .2s all ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+  outline: none;
+  appearance: none;
+  border-radius: 100%;
+  background: #FFE6AF;
+  border: none;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  font-size: 1.125rem;
+  line-height: 20px;
+  text-align: bottom;
+}
+
+.link {
+  text-decoration: underline;
+  color: #FFE6AF;
+  font-size: 1.125rem;
+  line-height: 16px;
+}
+
+/*
+                              </content>
+*/

@@ -1,0 +1,21 @@
+.devise-form {
+  margin-top: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+}
+
+.devise-caption {
+  font-family: "LT-Bold", sans-serif;
+  margin-bottom: 28px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.panel-button-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}

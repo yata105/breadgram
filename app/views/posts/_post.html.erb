@@ -1,3 +1,48 @@
+<div class="post-show-container bg2c" id="<%= dom_id post %>">
+  <div class="image-panel bg2c" style="margin: 0px">
+    <% if post.image.attached? %>
+      <%= image_tag(post.image, class: "post-image-mini bg2c") %>
+    <% end %>
+  </div>
+  <div class="post-info-panel bg2c" style="margin: 0px; width: 308px;">
+    <div class="post-info bg2c"> 
+      <% if post.user.avatar.attached? %>
+        <%= image_tag post.user.thumbnail, alt: "profile image" %>
+      <% else %>
+        <%= image_tag "profile.svg", alt: "profile image", class: "profile-image bg2c" %>
+      <% end %>
+      <div class="post-profile-date-likes bg2c">
+        <div class="post-profile-date bg2c">
+          <div class="post-profile bg2c">
+            <%= post.user.username %>
+          </div>
+          <div class="post-date bg2c">
+            <%= post.created_at.to_date %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-description bg2c">
+      <%= post.description %>
+    </div>
+    <div class="post-buttons">
+      <button class="button">
+        <%= image_tag "like.svg", alt: "like", style: "height: 20px; width: 22.55px;", class: "bg-transparent" %>
+        <div class="button-text">
+          Like
+        </div>
+      </button>
+      <button class="button">
+        <%= image_tag "comment.svg", alt: "comment", style: "height: 22px; width: 22px;", class: "bg-transparent" %>
+        <div class="button-text">
+          Comment
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 
 <div id="<%= dom_id post %>">
   <p>
     <strong>User:</strong>
@@ -9,4 +54,9 @@
     <%= post.description %>
   </p>
 
+  <% if post.image.attached? %>
+    <%= image_tag(post.image) %>
+  <% end %>
+
 </div>
+-->
