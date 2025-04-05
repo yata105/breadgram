@@ -29,7 +29,15 @@
         </div>
       </div>
       <div class="title" data-turbo="false">
-        <%= yield(:page_title) %>
+        <% if user_signed_in? %>
+        <%= button_to "Sign out", destroy_user_session_path, 
+                method: :delete, 
+                form_class: "inline-form", 
+                class: "button" %>
+        
+        <% else %>
+          <%= yield(:page_title) %>
+        <% end %>
       </div>  
       <div class="empty138w">
       </div>
