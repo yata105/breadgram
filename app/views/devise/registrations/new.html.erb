@@ -26,7 +26,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-  <div class="panel-button-link">
+  <div class="panel-button-link" style="margin-top: 20px;">
     <%= link_to "or sign in..", new_session_path(resource_name), class: "link" %>
     <%= f.submit "Sign up", style: "width: 92px;" %>
   </div>

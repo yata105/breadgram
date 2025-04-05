@@ -1,27 +1,54 @@
 <%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
+<div class="post-show-container">
+  <div class="image-panel">
+    <%= link_to posts_path, class: "button" do %>
+      <%= image_tag "arrow_back.svg", alt: "back", style: "height: 18px; width: 8px;", class: "bg-transparent" %>
+      <div class="button-text">
+        Back
+      </div>
+    <% end %>
+    <div class="add-image-container">
+      <div class="default-text">Drag and drop the photo or select it on your computer</div>
+      <label class="file-upload-button">
+        <%= form.file_field :image, class: "file-input", accept: "image/*" %>
+        Select file on computer
+      </label>
+      <div class="default-text" id="selected-file" display="none"></div>
+    </div>
+    <script>
+      const inputFile = document.querySelector('input[type="file"]');
+      const fileText = document.querySelector("#selected-file");
+      inputFile.addEventListener('change', (e) => {
+        const fileInfo = e.target.files[0];
+        fileText.innerHTML = `Selected file: ${fileInfo.name}`;
+      });
+    </script>
+  </div>
+  <div class="post-info-panel">
+    <div class="textarea-container">
+      <%= form.textarea :description, placeholder: "Leave a description...", maxlength: 200, rows: 6 %>
+      <div class="hint-text" style="align-self: flex-end">0/200</div>
+      <script>
+        const textarea = document.querySelector("textarea");
+        const hintText = document.querySelector(".hint-text");
+        textarea.addEventListener('input', (e) => {
+          hintText.innerHTML = `${e.target.value.length}/200`
+        });
+      </script>
+    </div>
+    <%= form.submit %>
+
+    <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
       <ul>
         <% post.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
   </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>

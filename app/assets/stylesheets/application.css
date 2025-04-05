@@ -156,6 +156,33 @@ br {
   display: none;
 }
 
+.textarea-container {
+  padding: 8px;
+  border: 1px solid #4D4F59;
+  color: #4D4F59;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea-container:hover {
+  border: 1px solid #BFC3D4;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  color: #4D4F59;
+  font-size: 1.125rem;
+  line-height: 28px;
+  resize: none;
+}
+
+textarea:focus {
+  color: #BFC3D4;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -216,6 +243,33 @@ label {
   font-size: 1.125rem;
   line-height: 16px;
 }
+
+.file-upload-button {
+  background: #897957;
+  border-radius: 8px;
+  border: none;
+  height: 34px;
+  padding: 0 8px;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFE6AF;
+  font-size: 1.125rem;
+  
+  .file-input {
+    display: none;
+  }
+  
+  /* Стиль при наведении */
+  &:hover {
+    background: #a39067;
+    color: #ffefce;
+  }
+}
+ 
 
 /*
                               </content>

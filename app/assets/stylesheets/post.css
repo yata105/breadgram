@@ -107,3 +107,28 @@
 .bg2c {
   background: #2C2C2C;
 }
+
+.add-image-container {
+  width: 800px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid #4D4F59;
+  border-radius: 8px;
+}
+
+.default-text {
+  font-size: 1.125rem;
+  color: #FFFFFF;
+  line-height: 20px;
+}
+
+.hint-text {
+  font-size: 1.125rem;
+  color: #4D4F59;
+  line-height: 20px;
+}
