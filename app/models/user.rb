@@ -1,9 +1,19 @@
 class User < ApplicationRecord
+  attr_accessor :login
+
   has_one_attached :avatar
   has_many :posts
   has_many :comments
-  
-  attr_accessor :login
+
+  has_many :active_follows, class_name: "Follow", 
+                            foreign_key: "follower_id",
+                            dependent: :destroy
+  has_many :following, through: :active_follows, source: :followed
+
+  has_many :passive_follows, class_name: "Follow", 
+                             foreign_key: "followed_id",
+                             dependent: :destroy
+  has_many :followers, through: :passive_follows, source: :follower
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -25,6 +35,18 @@ class User < ApplicationRecord
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def follow(other_user)
+    following << other_user unless self == other_user
+  end
+
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   def thumbnail
