@@ -1,0 +1,8 @@
+<%= link_to path, class: "lp-item #{'lp-active' if active}" do %>
+  <div class="lp-svg">
+    <%= image_tag icon, alt: "#{text.downcase} icon", class: "lp-image" %>
+  </div>
+  <div class="lp-text">
+    <%= text %>
+  </div>
+<% end %>

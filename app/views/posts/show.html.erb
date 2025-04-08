@@ -4,7 +4,7 @@
 
 <div class="post-show-container">
   <div class="image-panel">
-    <%= link_to posts_path, class: "button" do %>
+    <%= link_to (request.referer || posts_path), class: "button" do %>
       <%= image_tag "arrow_back.svg", alt: "back", style: "height: 18px; width: 8px;", class: "bg-transparent" %>
       <div class="button-text">
         Back
@@ -31,12 +31,17 @@
             <%= @post.created_at.to_date %>
           </div>
         </div>
-        <button class="button">
-          <%= image_tag "like.svg", alt: "like", style: "height: 20px; width: 22.55px;", class: "bg-transparent" %>
-          <div class="button-text">
-            Like
-          </div>
-        </button>
+        <div data-controller="like" data-like-post-id-value="<%= @post.id %>">
+          <%= check_box_tag "like_toggle_#{@post.id}", "1", @post_liked,
+                id: "like-toggle-#{@post.id}", class: "hidden-checkbox",
+                data: { action: "change->like#toggle" } %>
+          <label for="like-toggle-<%= @post.id %>" class="button">
+            <%= image_tag "like.svg", alt: "like", style: "height: 20px; width: 22.55px;", class: "bg-transparent" %>
+            <div class="button-text" data-like-target="count">
+              <%= @post.likes.size %>
+            </div>
+          </label>
+        </div>
       </div>
     </div>
     <div class="post-description">

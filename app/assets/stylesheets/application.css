@@ -20,6 +20,13 @@
   font-family: "LT", sans-serif;
 }
 
+
+.default-text {
+  font-size: 1.125rem;
+  color: #FFFFFF;
+  line-height: 20px;
+}
+
 header {
   background: #2E2E2E;
   color: #FFE6AF;
@@ -79,19 +86,52 @@ header {
 */
 
 .content {
-  padding-left: 269px;
-  padding-right: 269px;
+  margin-left: 263px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: fit-content;
+  gap: 12px;
 }
 
 .left-panel {
   width: 145px;
   display: flex;
   flex-direction: column;
+  align-self: left;
   gap: 4px;
+  margin-top: 12px;
+  height: fit-content;
+}
+
+.hidden-checkbox {
+  display: none;
+}
+
+.hidden-checkbox:checked + .button {
+  background: #a39067;
+  color: #ffefce;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  outline: none;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border-radius: 100%;
+  box-sizing: border-box;
+  border: 1px solid #4D4F59;
+  transition: .2s all ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+  outline: none;
+  appearance: none;
+  border-radius: 100%;
+  background: #FFE6AF;
+  border: none;
+  box-sizing: border-box;
 }
 
 .button,
@@ -113,8 +153,8 @@ input[type="submit"] {
   font-size: 1.125rem;
 }
 
-.button,
-input[type="button"],
+.button:hover,
+input[type="button"]:hover,
 input[type="submit"]:hover {
   background: #a39067;
   color: #ffefce;
@@ -209,26 +249,6 @@ input[type="tel"]:focus {
   border: 1px solid #BFC3D4;
 }
 
-input[type="checkbox"] {
-  appearance: none;
-  outline: none;
-  width: 16px;
-  height: 16px;
-  background: none;
-  border-radius: 100%;
-  box-sizing: border-box;
-  border: 1px solid #4D4F59;
-  transition: .2s all ease-in-out;
-}
-
-input[type="checkbox"]:checked {
-  outline: none;
-  appearance: none;
-  border-radius: 100%;
-  background: #FFE6AF;
-  border: none;
-  box-sizing: border-box;
-}
 
 label {
   display: block;
@@ -238,6 +258,7 @@ label {
 }
 
 .link {
+  background: inherit;
   text-decoration: underline;
   color: #FFE6AF;
   font-size: 1.125rem;
@@ -263,13 +284,51 @@ label {
     display: none;
   }
   
-  /* Стиль при наведении */
   &:hover {
     background: #a39067;
     color: #ffefce;
   }
 }
- 
+
+.lp-svg {
+  width: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+}
+
+.lp-image {
+  height: 30px;
+  background: inherit;
+}
+
+.lp-text {
+  background: inherit;
+  color: #A3A3A3;
+  font-size: 1.25rem;
+  margin-top: 2px;
+}
+
+.lp-item {
+  display: flex;
+  flex-direction: row;
+  height: 42px;
+  width: 145px;
+  background: #292929;
+  border-radius: 8px;
+  border: none;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFE6AF;
+  font-size: 1.125rem;
+}
+
+.lp-active {
+  background: #2E2E2E;
+}
 
 /*
                               </content>

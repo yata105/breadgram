@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root "posts#index"
   
   devise_for :users, controllers: { registrations: 'registrations' }
+  resources :users, only: [:show]
+  resources :likes, only: [:create, :destroy]
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

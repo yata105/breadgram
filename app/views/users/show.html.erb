@@ -1,0 +1,42 @@
+<% content_for :page_title, "Profile" %>
+
+<%= render 'shared/left_panel' %>
+<div class="content-posts" style="padding-top: 24px">
+  <div class="user-show-info">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.show_thumbnail, alt: "profile image" %>
+    <% else %>
+      <%= image_tag "profile.svg", alt: "profile image", style: "height: 192px; background: inherit" %>
+    <% end %>
+    <div class="user-show-text-info">
+      <div class="user-show-username-button">
+        <div class="user-show-username">
+          <%= @user.username %>
+        </div>
+        <% if current_user != @user %>
+        <button class="button">
+          Follow
+        </button>
+        <% else %>
+        <%= link_to new_post_path, class: "link" do %>
+        New post
+        <% end %>
+        <% end %>
+      </div>
+      <div class="user-show-related-info-panel">
+        <div class="user-show-related-info-item"><%= @posts_count %> posts</div>
+        <div class="user-show-related-info-item"><%= @followers_count %> followers</div>
+        <div class="user-show-related-info-item"><%= @following_count %> following</div>
+      </div>
+    </div>   
+  </div>
+  <div class="posts-grid">
+    <% @posts.each do |post| %>
+      <% if post.image.attached? %>
+        <%= link_to post_path(post), class: "user-post-image" do %>
+          <%= image_tag post.image, alt: "Post ##{post.id}" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -3,12 +3,18 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post
+      .includes(:user, :comments, :likes, image_attachment: :blob)
+      .with_attached_image
+      .order(created_at: :desc)
+
+    @liked_post_ids = current_user.liked_posts.pluck(:id)
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-    @post = Post.includes(comments: :user).find(params[:id])
+    @post = Post.includes(:user, :comments, :likes, image_attachment: :blob).with_attached_image.find(params[:id])
+    @post_liked = current_user.liked_posts.include?(@post)
   end
 
   # GET /posts/new

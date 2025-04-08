@@ -1,0 +1,22 @@
+<div class="left-panel">
+  <%= render partial: 'shared/left_panel_item', locals: {
+    path: user_path(current_user),
+    icon: 'profile.svg',
+    text: 'Profile',
+    active: current_page?(user_path(current_user))
+  } %>
+
+  <%= render partial: 'shared/left_panel_item', locals: {
+    path: posts_path,
+    icon: 'feed.svg',
+    text: 'Feed',
+    active: current_page?(posts_path)
+  } %>
+
+  <%= render partial: 'shared/left_panel_item', locals: {
+    path: '#',
+    icon: 'settings.svg',
+    text: 'Settings',
+    active: false
+  } %>
+</div>
