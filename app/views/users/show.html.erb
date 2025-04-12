@@ -3,29 +3,32 @@
 <%= render 'shared/left_panel' %>
 <div class="content-posts" style="padding-top: 24px">
   <div class="user-show-info">
-    <% if @user.avatar.attached? %>
-      <%= image_tag @user.show_thumbnail, alt: "profile image" %>
-    <% else %>
-      <%= image_tag "profile.svg", alt: "profile image", style: "height: 192px; background: inherit" %>
-    <% end %>
-    <div class="user-show-text-info">
+    <%= image_tag "profile.svg", alt: "profile image", style: "height: 192px; background: inherit" %>
+    <div class="user-show-text-info" data-controller="follow" data-follow-username-value="<%= @user.username %>">
       <div class="user-show-username-button">
         <div class="user-show-username">
           <%= @user.username %>
         </div>
         <% if current_user != @user %>
-        <button class="button">
-          Follow
-        </button>
+          <%= check_box_tag "follow_toggle_#{@user.username}", "1", @followed,
+                  id: "follow-toggle-#{@user.username}", class: "hidden-checkbox",
+                  data: { action: "change->follow#toggle" } %>
+            <label for="follow-toggle-<%= @user.username %>" class="button" id="follow-button">
+              <% if @followed %>
+                Unfollow
+              <% else %>
+                Follow
+              <% end %>
+            </label>
         <% else %>
-        <%= link_to new_post_path, class: "link" do %>
-        New post
-        <% end %>
+          <%= link_to new_post_path, class: "link" do %>
+            New post
+          <% end %>
         <% end %>
       </div>
       <div class="user-show-related-info-panel">
         <div class="user-show-related-info-item"><%= @posts_count %> posts</div>
-        <div class="user-show-related-info-item"><%= @followers_count %> followers</div>
+        <div class="user-show-related-info-item" data-follow-target="count"><%= @followers_count %> followers</div>
         <div class="user-show-related-info-item"><%= @following_count %> following</div>
       </div>
     </div>   
@@ -39,4 +42,5 @@
       <% end %>
     <% end %>
   </div>
+  <%= will_paginate @posts, class: "pagination" %>
 </div>

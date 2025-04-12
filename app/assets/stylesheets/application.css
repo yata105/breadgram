@@ -20,7 +20,6 @@
   font-family: "LT", sans-serif;
 }
 
-
 .default-text {
   font-size: 1.125rem;
   color: #FFFFFF;
@@ -54,11 +53,17 @@ header {
   background: inherit;
 }
 
+.caption-link {
+  text-decoration: none;
+  background: inherit;
+}
+
 .caption-text {
   background: inherit;
   color: inherit;
   font-family: "LT-Bold", sans-serif;
   font-size: 1.25rem;
+  color: #FFE6AF;
 }
 
 .title {
@@ -105,6 +110,10 @@ header {
 }
 
 .hidden-checkbox {
+  display: none;
+}
+
+.hidden-radio {
   display: none;
 }
 
@@ -328,6 +337,26 @@ label {
 
 .lp-active {
   background: #2E2E2E;
+}
+
+.errors {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error-caption {
+  font-size: 1.25rem;
+  color: #FF9C9D;
+  line-height: 24px;
+  font-family: "LT-Bold", sans-serif;
+}
+
+.error-text {
+  font-size: 1.125rem;
+  color: #FF9C9D;
+  line-height: 20px;
 }
 
 /*

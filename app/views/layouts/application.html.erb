@@ -24,20 +24,16 @@
     <header>
       <div class="logo-container">
         <%= image_tag "breadgram_logo.svg", alt: "Иконка", class: "svg-logo" %>
-        <div class="caption-text">
-          breadgram
-        </div>
+        <% if user_signed_in? %>
+          <%= link_to user_path(current_user), class: "caption-link" do %>
+            <div class="caption-text">breadgram</div>
+          <% end %>
+        <% else %>
+          <div class="caption-text">breadgram</div>
+        <% end %>
       </div>
       <div class="title" data-turbo="false">
-        <% if user_signed_in? %>
-        <%= button_to "Sign out", destroy_user_session_path, 
-                method: :delete, 
-                form_class: "inline-form", 
-                class: "button" %>
-        
-        <% else %>
-          <%= yield(:page_title) %>
-        <% end %>
+        <%= yield(:page_title) %>
       </div>  
       <div class="empty138w">
       </div>

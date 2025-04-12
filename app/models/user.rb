@@ -22,8 +22,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
 
-  validates :username, presence: true, format: { without: /@/, message: "can\`t contain @" }
-  validates :email, presence: true, uniqueness: true
+  validates :username, presence: true,
+            uniqueness: true,
+            length: { maximum: 24 },
+            format: { with: /\A[a-z0-9]+\z/, message: "must be a unique 24 length latin/number value" }
+
+  validates :email, presence: true, 
+            uniqueness: true,
+            format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "must contain '@'" }
 
   def self.find_for_database_authentication(warden_conditions)
     Rails.logger.info "!!! Auth conditions: #{warden_conditions.inspect} !!!"
@@ -40,16 +46,8 @@ class User < ApplicationRecord
     end
   end
 
-  def follow(other_user)
-    following << other_user unless self == other_user
-  end
-
-  def unfollow(other_user)
-    following.delete(other_user)
-  end
-
-  def following?(other_user)
-    following.include?(other_user)
+  def to_param
+    username
   end
 
   def thumbnail

@@ -1,0 +1,26 @@
+<div class="post-info-panel">
+  <div class="textarea-container">
+    <%= form.textarea :description, placeholder: "Leave a description...", maxlength: 200, rows: 6 %>
+    <div class="hint-text" style="align-self: flex-end">0/200</div>
+  </div>
+  <%= form.submit %>
+
+  <% if post.errors.any? %>
+  <div class="errors">
+    <div class="error-caption"><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</div>
+    <% post.errors.each do |error| %>
+    <div class="error-text"><%= error.full_message %></div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.querySelector("textarea");
+    const hintText = document.querySelector(".hint-text");
+    textarea.addEventListener('input', (e) => {
+      hintText.innerHTML = `${e.target.value.length}/200`
+    });
+  });
+</script>

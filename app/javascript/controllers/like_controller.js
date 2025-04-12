@@ -1,15 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static values = { postId: Number }
-  static targets = ["count"]
+  static values = { postId: Number };
+  static targets = ["count"];
 
   toggle(event) {
-    const checked = event.target.checked
-    const postId = this.postIdValue
+    const checked = event.target.checked;
+    const postId = this.postIdValue;
 
-    const url = `/likes` + (checked ? "" : `/destroy`)
-    const method = checked ? "POST" : "DELETE"
+    const url = `/likes` + (checked ? "" : `/destroy`);
+    const method = checked ? "POST" : "DELETE";
 
     fetch(url, {
       method: method,
@@ -21,15 +21,15 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
-      this.countTarget.textContent = data.likes_count
+      this.countTarget.textContent = data.likes_count;
     })
     .catch(error => {
-      console.error("Ошибка при отправке лайка:", error)
+      console.error("Failed to like:", error)
     })
   }
 
   getMetaValue(name) {
-    const element = document.querySelector(`meta[name="${name}"]`)
-    return element && element.getAttribute("content")
+    const element = document.querySelector(`meta[name="${name}"]`);
+    return element && element.getAttribute("content");
   }
 }

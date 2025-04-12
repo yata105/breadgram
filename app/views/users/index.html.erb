@@ -1,0 +1,12 @@
+<% content_for :page_title, "People" %>
+
+<%= render 'shared/left_panel' %>
+<div class="content-posts" style="padding-top: 40px">
+  <% @users.each do |user| %>
+    <div class="settings-elem">
+      <%= link_to user_path(user), class: "person" do %>
+        <%= user.username %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

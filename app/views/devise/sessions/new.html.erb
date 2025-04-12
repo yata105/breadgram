@@ -1,9 +1,9 @@
-<% content_for :page_title, "Sign in" %>
+<% content_for :page_title, "Log in" %>
 <%= stylesheet_link_tag 'devise', media: 'all' %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "devise-form" }) do |f| %>
   <div class="devise-caption">
-    Sign in
+    Log in
   </div>
   <div class="field">
     <%= f.label :login, "Email or username" %><br />

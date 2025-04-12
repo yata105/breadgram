@@ -1,0 +1,13 @@
+<% content_for :page_title, "Settings" %>
+
+<%= render 'shared/left_panel' %>
+<div class="content-posts" style="padding-top: 40px">
+  <div class="settings-elem">
+    <p>Sign out?</p>
+    <%= button_to "Sign out", destroy_user_session_path, 
+                method: :delete, 
+                form_class: "inline-form", 
+                class: "button" %>
+  </div>
+  
+</div>

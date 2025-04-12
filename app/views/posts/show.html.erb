@@ -1,7 +1,5 @@
 <% content_for :page_title, "View post" %>
 
-<p style="color: green"><%= notice %></p>
-
 <div class="post-show-container">
   <div class="image-panel">
     <%= link_to (request.referer || posts_path), class: "button" do %>
@@ -10,23 +8,17 @@
         Back
       </div>
     <% end %>
-    <% if @post.image.attached? %>
-      <%= image_tag(@post.image, class: "post-image") %>
-    <% end %>
+    <%= image_tag(@post.image, class: "post-image") %>
   </div>
   
   <div class="post-info-panel">
     <div class="post-info">
-      <% if @post.user.avatar.attached? %>
-        <%= image_tag @post.user.thumbnail, alt: "profile image" %>
-      <% else %>
-        <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
-      <% end %>
+      <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
       <div class="post-profile-date-likes">
         <div class="post-profile-date">
-          <div class="post-profile">
+          <%= link_to user_path(@post.user), class: "post-profile" do %>
             <%= @post.user.username %>
-          </div>
+          <% end %>
           <div class="post-date">
             <%= @post.created_at.to_date %>
           </div>
@@ -47,41 +39,60 @@
     <div class="post-description">
       <%= @post.description %>
     </div>
-    <input type="text" name="comment" id="comment" placeholder="Leave a comment...">
+    <div data-controller="comment" data-comment-post-id-value="<%= @post.id %>" class="post-info-panel" style="margin-top: 0px;">
+      <div class="textarea-container">
+        <textarea name="comment" id="comment" placeholder="Leave a comment..." maxlength="200" rows="4" class="comment-textarea" data-comment-target="textarea"></textarea>
+        <div class="hint-text" style="align-self: flex-end" data-comment-target="hintText">0/200</div>
+        <input type="hidden" value="<%= @post.id %>" data-comment-target="postId">
+        <button type="button" class="button" data-action="click->comment#submitComment">Send</button>
+      </div>
+      <% if @post.user == current_user %>
+        <%= link_to "Edit post", edit_post_path(@post), class: "link", style: "align-self: flex-end" %>
+      <% end %>
 
-    <% @post.comments.each do |comment| %>
-    <div class="comment">
-      <div class="post-info">
-        <% if comment.user.avatar.attached? %>
-          <%= image_tag @post.user.thumbnail, alt: "profile image" %>
-        <% else %>
-          <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
-        <% end %>
-        <div class="post-profile-date-likes">
-          <div class="post-profile-date">
-            <div class="post-profile">
-              <%= comment.user.username %>
+      <div id="comments-list" class="comments-container">
+        <% @comments.each do |comment| %>
+          <div class="comment" data-comment-id="<%= comment.id %>">
+            <div class="post-info">
+              <%= image_tag "profile.svg", alt: "profile image", class: "profile-image" %>
+              <div class="post-profile-date-likes">
+                <div class="post-profile-date">
+                  <%= link_to user_path(comment.user), class: "post-profile" do %>
+                    <%= comment.user.username %>
+                  <% end %>
+                  <div class="comment-date">
+                    <%= comment.created_at.to_date %>
+                    <% if comment.user == current_user %>
+                      <%= image_tag "delete.svg",
+                        alt: "delete",
+                        class: "delete-button",
+                        data: {
+                          action: "click->comment#deleteComment"
+                        } %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="post-date">
-              <%= comment.created_at.to_date %>
+            <div class="post-description">
+              <%= comment.value %>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="post-description">
-        <%= comment.value %>
+        <% end %>
       </div>
     </div>
-    <% end %>
   </div>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.querySelector(".comment-textarea");
+    const hintText = document.querySelector(".hint-text");
 
-<!--
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
-</div>
--->
+    if (textarea && hintText) {
+      textarea.addEventListener('input', (e) => {
+        hintText.innerHTML = `${e.target.value.length}/200`;
+      });
+    }
+  });
+</script>

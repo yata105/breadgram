@@ -14,9 +14,16 @@
   } %>
 
   <%= render partial: 'shared/left_panel_item', locals: {
-    path: '#',
+    path: users_path,
+    icon: 'users.svg',
+    text: 'People',
+    active: current_page?(users_path)
+  } %>
+
+  <%= render partial: 'shared/left_panel_item', locals: {
+    path: settings_path,
     icon: 'settings.svg',
     text: 'Settings',
-    active: false
+    active: current_page?(settings_path)
   } %>
 </div>

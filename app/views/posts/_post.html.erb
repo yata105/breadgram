@@ -1,21 +1,15 @@
 <div class="post-show-container bg2c" id="<%= dom_id post %>">
   <div class="image-panel bg2c" style="margin: 0px">
-    <% if post.image.attached? %>
-      <%= image_tag(post.image, class: "post-image-mini bg2c") %>
-    <% end %>
+    <%= image_tag(post.image, class: "post-image-mini bg2c") %>
   </div>
   <div class="post-info-panel bg2c" style="margin: 0px; width: 308px;">
     <div class="post-info bg2c"> 
-      <% if post.user.avatar.attached? %>
-        <%= image_tag post.user.thumbnail, alt: "profile image" %>
-      <% else %>
-        <%= image_tag "profile.svg", alt: "profile image", class: "profile-image bg2c" %>
-      <% end %>
+      <%= image_tag "profile.svg", alt: "profile image", class: "profile-image bg2c" %>
       <div class="post-profile-date-likes bg2c">
         <div class="post-profile-date bg2c">
-          <div class="post-profile bg2c">
+          <%= link_to user_path(post.user), class: "post-profile bg2c" do %>
             <%= post.user.username %>
-          </div>
+          <% end %>
           <div class="post-date bg2c">
             <%= post.created_at.to_date %>
           </div>

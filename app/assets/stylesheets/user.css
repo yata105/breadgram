@@ -64,3 +64,30 @@
 .user-post-image img:hover {
   transform: scale(1.05);
 }
+
+.settings-elem {
+  background: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: inherit;
+  width: 920px;
+  align-items: center;
+}
+
+.settings-elem p {
+  background: inherit;
+  font-size: 1.5rem;
+}
+
+.person {
+  font-size: 1.5rem;
+  background: inherit;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.person:hover {
+  color: #FFE6AF;
+  text-decoration: underline;
+}

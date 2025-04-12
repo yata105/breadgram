@@ -2,10 +2,31 @@
 
 <%= render 'shared/left_panel' %>
 <div id="posts" class="content-posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
+  <div class="feed-filters" data-controller="feed-filter" style="margin-bottom: -60px">
+    <%= form_with url: posts_path, class: "filter-buttons", method: :get, data: { turbo_frame: "posts" } do %>
+      <%= radio_button_tag :filter, "all", @filter == "all", id: "filter_all", class: "hidden-radio", data: { action: "change->feed-filter#submit" } %>
+      <label for="filter_all" class="button">All posts</label>
+  
+      <%= radio_button_tag :filter, "following", @filter == "following", id: "filter_following", class: "hidden-radio", data: { action: "change->feed-filter#submit" } %>
+      <label for="filter_following" class="button">Following</label>
+    <% end %>
+  </div>
+  
+
+  <% if @posts.size != 0 %>
+
+  <%= turbo_frame_tag "posts" %>
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+    <%= will_paginate @posts, class: "pagination" %>
+  </%= turbo_frame_tag %>
+
+  <% else %>
+
+  <div class="settings-elem" style="margin-top: 40px">
+    <p>There are no posts yet. Follow someone to view their posts!</p>
+  </div>
+
   <% end %>
 </div>
-<%#= link_to "New post", new_post_path %>
-
-<%#= link_to "Show this post", post %>

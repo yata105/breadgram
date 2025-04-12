@@ -1,12 +1,16 @@
-<% content_for :title, "Editing post" %>
+<% content_for :page_title, "Edit post" %>
 
-<h1>Editing post</h1>
-
-<%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Show this post", @post %> |
-  <%= link_to "Back to posts", posts_path %>
+<%= form_with(model: @post) do |form| %>
+<div class="post-show-container">
+  <div class="image-panel">
+    <%= link_to (request.referer || posts_path), class: "button" do %>
+      <%= image_tag "arrow_back.svg", alt: "back", style: "height: 18px; width: 8px;", class: "bg-transparent" %>
+      <div class="button-text">
+        Back
+      </div>
+    <% end %>
+    <%= image_tag(@post.image, class: "post-image") %>
+  </div>
+  <%= render partial: "shared/description_panel", locals: { form: form, post: @post } %>
 </div>
+<% end %>
