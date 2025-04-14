@@ -10,12 +10,11 @@ class PostsController < ApplicationController
                     Post.all
                   end
   
-    # Добавляем пагинацию — 5 постов на страницу
     @posts = posts_scope
       .includes(:user, :likes, image_attachment: :blob)
       .with_attached_image
       .order(created_at: :desc)
-      .paginate(page: params[:page], per_page: 5)
+      .paginate(page: params[:page], per_page: 20)
   
     @liked_post_ids = current_user.liked_posts.pluck(:id)
   end
