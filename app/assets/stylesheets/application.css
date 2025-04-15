@@ -188,7 +188,7 @@ input[type="submit"]:hover {
 }
 
 
-.field {
+.field, .field_with_errors {
   display: flex;
   flex-direction: column;
   gap: 6px;
