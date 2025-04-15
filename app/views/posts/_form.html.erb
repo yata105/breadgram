@@ -20,12 +20,11 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("turbo:load", () => {
     const inputFile = document.querySelector('input[type="file"]');
     const fileText = document.querySelector("#selected-file");
     inputFile.addEventListener('change', (e) => {
       let file = e.target.files[0];
-      console.log(file.name);
       if (file.type !== "image/jpeg" && file.type !== "image/png") {
         fileText.innerHTML = "Only JPEG and PNG images are allowed!";
         e.preventDefault();
