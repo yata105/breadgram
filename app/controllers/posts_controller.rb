@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update ]
 
   def index
     @filter = params[:filter] || "all"
@@ -64,21 +64,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
-    @post.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  private
+  
+  def set_post
+    @post = Post.find(params.expect(:id))
   end
 
-  private
-    def set_post
-      @post = Post.find(params.expect(:id))
-    end
-
-    def post_params
-      params.expect(post: [ :user_id, :description, :image ]).merge({ user_id: current_user.id })
-    end
+  def post_params
+    params.expect(post: [ :user_id, :description, :image ]).merge({ user_id: current_user.id })
+  end
 end

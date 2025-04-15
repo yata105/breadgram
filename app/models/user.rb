@@ -25,14 +25,13 @@ class User < ApplicationRecord
   validates :username, presence: true,
             uniqueness: true,
             length: { maximum: 24 },
-            format: { with: /\A[a-z0-9]+\z/, message: "must be a unique 24 length latin/number value" }
+            format: { with: /\A[a-z0-9]+\z/, message: "must be a unique 24 length lowercase latin/number value" }
 
   validates :email, presence: true, 
             uniqueness: true,
             format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "must contain '@'" }
 
   def self.find_for_database_authentication(warden_conditions)
-    Rails.logger.info "!!! Auth conditions: #{warden_conditions.inspect} !!!"
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     
@@ -48,13 +47,5 @@ class User < ApplicationRecord
 
   def to_param
     username
-  end
-
-  def thumbnail
-    avatar.variant(resize_to_limit: [48, 48]).processed
-  end
-
-  def show_thumbnail
-    avatar.variant(resize_to_limit: [192, 192]).processed
   end
 end

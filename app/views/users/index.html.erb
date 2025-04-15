@@ -1,7 +1,7 @@
 <% content_for :page_title, "People" %>
 
 <%= render 'shared/left_panel' %>
-<div class="content-posts" style="padding-top: 40px">
+<div class="content-posts" style="padding-top: 40px; border-radius: 8px;">
   <% @users.each do |user| %>
     <div class="settings-elem">
       <%= link_to user_path(user), class: "person" do %>

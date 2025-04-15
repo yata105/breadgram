@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts, except: [:destroy]
   get "home/index"
 
   root "posts#index"
@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, param: :username
   resources :users, only: [:show]
-  resources :likes, only: [:create, :destroy]
+  resources :likes, only: [:create] do
+    collection do
+      delete 'destroy', to: 'likes#destroy'
+    end
+  end
   resources :follows, only: [:create, :destroy]
   resources :posts do
     resources :comments, only: [:create, :destroy]
